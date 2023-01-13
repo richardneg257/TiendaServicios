@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using TiendaServicios.Api.Autor.Persistencia;
 
@@ -5,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<ContextoAutor>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConexionDatabase")));
+builder.Services.AddMediatR(typeof(Program));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
