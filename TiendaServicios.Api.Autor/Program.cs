@@ -12,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ContextoAutor>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConexionDatabase")));
 builder.Services.AddMediatR(typeof(Program));
 builder.Services.AddScoped<IValidator<AddNewAuthor.Command>, AddNewAuthor.CommandValidation>();
+builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddControllers();
 

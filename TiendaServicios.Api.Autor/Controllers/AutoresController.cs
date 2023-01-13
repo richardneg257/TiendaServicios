@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TiendaServicios.Api.Autor.Aplicacion;
+using TiendaServicios.Api.Autor.Dtos;
 using TiendaServicios.Api.Autor.Modelo;
 
 namespace TiendaServicios.Api.Autor.Controllers
@@ -21,13 +21,13 @@ namespace TiendaServicios.Api.Autor.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<AutorLibro>>> GetAutores()
+        public async Task<ActionResult<List<AutorDto>>> GetAutores()
         {
             return await mediator.Send(new GetAuthors.Query());
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<AutorLibro>> GetById(string id)
+        public async Task<ActionResult<AutorDto>> GetById(string id)
         {
             return await mediator.Send(new GetAuthorById.Query() { AutorLibroGuid = id });
         }
