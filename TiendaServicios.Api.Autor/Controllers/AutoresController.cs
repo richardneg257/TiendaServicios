@@ -17,9 +17,9 @@ namespace TiendaServicios.Api.Autor.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Unit>> Crear([FromBody] Nuevo.Ejecuta ejecuta)
+        public async Task<ActionResult<Unit>> Crear([FromBody] AddNewAuthor.Command command)
         {
-            return await mediator.Send(ejecuta);
+            return await mediator.Send(command);
         }
     }
 }
