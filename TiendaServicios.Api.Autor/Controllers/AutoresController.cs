@@ -23,6 +23,12 @@ namespace TiendaServicios.Api.Autor.Controllers
             return await mediator.Send(new GetAuthors.Query());
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<AutorLibro>> GetById(string id)
+        {
+            return await mediator.Send(new GetAuthorById.Query() { AutorLibroGuid = id });
+        }
+
         [HttpPost]
         public async Task<ActionResult<Unit>> Crear([FromBody] AddNewAuthor.Command command)
         {
