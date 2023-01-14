@@ -1,6 +1,12 @@
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using TiendaServicios.Api.CarritoCompra.Persistencia;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<ContextoCarrito>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddMediatR(typeof(Program));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
