@@ -27,6 +27,12 @@ namespace TiendaServicios.Api.Libro.Controllers
             return await mediator.Send(new GetBooks.Query());
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<LibroDto>> GetLibroById(Guid id)
+        {
+            return await mediator.Send(new GetBookById.Query() { LibroId = id });
+        }
+
         [HttpPost]
         public async Task<ActionResult<Unit>> Crear([FromBody] AddNewBook.Command command)
         {
