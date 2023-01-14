@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using TiendaServicios.Api.Libro.Aplicacion;
+using TiendaServicios.Api.Libro.Dtos;
 
 namespace TiendaServicios.Api.Libro.Controllers
 {
@@ -18,6 +19,12 @@ namespace TiendaServicios.Api.Libro.Controllers
         {
             this.mediator = mediator;
             this.validator = validator;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<LibroDto>>> GetLibros()
+        {
+            return await mediator.Send(new GetBooks.Query());
         }
 
         [HttpPost]
