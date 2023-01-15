@@ -1,12 +1,19 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using TiendaServicios.Api.CarritoCompra.Persistencia;
+using TiendaServicios.Api.CarritoCompra.RemoteInterface;
+using TiendaServicios.Api.CarritoCompra.RemoteService;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<ContextoCarrito>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddMediatR(typeof(Program));
+builder.Services.AddHttpClient("Libros", cfg =>
+{
+    cfg.BaseAddress = new Uri(builder.Configuration["Services:Libros"]);
+});
+builder.Services.AddScoped<ILibrosService, LibrosService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

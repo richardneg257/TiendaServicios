@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TiendaServicios.Api.CarritoCompra.Aplicacion;
+using TiendaServicios.Api.CarritoCompra.Dtos;
 
 namespace TiendaServicios.Api.CarritoCompra.Controllers
 {
@@ -14,6 +15,12 @@ namespace TiendaServicios.Api.CarritoCompra.Controllers
         public CarritoComprasController(IMediator mediator)
         {
             this.mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<CarritoSesionDto>> GetCarrito(int id)
+        {
+            return await mediator.Send(new GetShoppingCart.Query() { CarritoSesionId = id });
         }
 
         [HttpPost]
