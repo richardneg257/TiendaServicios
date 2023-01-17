@@ -39,6 +39,26 @@ namespace TiendaServicios.Api.Libro.Tests
         }
 
         [Fact]
+        public async void GetLibroPorId()
+        {
+            var mockContexto = CrearContexto();
+            var mapConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingTest());
+            });
+            var mapper = mapConfig.CreateMapper();
+
+            var request = new GetBookById.Query();
+            request.LibroId = Guid.Empty;
+
+            var handler = new GetBookById.QueryHandler(mockContexto.Object, mapper);
+            var libro = await handler.Handle(request, new CancellationToken());
+
+            Assert.NotNull(libro);
+            Assert.True(libro.LibroId == Guid.Empty);
+        }
+
+        [Fact]
         public async void GetLibros()
         {
             var mockContexto = CrearContexto();
