@@ -31,6 +31,8 @@ namespace TiendaServicios.Api.Libro.Tests
             dbSet.As<IAsyncEnumerable<LibroMaterial>>().Setup(x => x.GetAsyncEnumerator(new CancellationToken()))
                 .Returns(new AsyncEnumerator<LibroMaterial>(dataPrueba.GetEnumerator()));
 
+            dbSet.As<IQueryable<LibroMaterial>>().Setup(x => x.Provider).Returns(new AsyncQueryProvider<LibroMaterial>(dataPrueba.Provider));
+
             var contexto = new Mock<ContextoLibro>();
             contexto.Setup(x => x.Libros).Returns(dbSet.Object);
             return contexto;
