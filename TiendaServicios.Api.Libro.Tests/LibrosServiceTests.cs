@@ -75,5 +75,23 @@ namespace TiendaServicios.Api.Libro.Tests
 
             Assert.True(lista.Any());
         }
+
+        [Fact]
+        public async void GuardarLibro()
+        {
+            var options = new DbContextOptionsBuilder<ContextoLibro>()
+                .UseInMemoryDatabase(databaseName: "BaseDatosLibro").Options;
+
+            var contexto = new ContextoLibro(options);
+            var request = new AddNewBook.Command();
+            request.Titulo = "Libro de Microservicios";
+            request.AutorLibroGuid = Guid.Empty;
+            request.FechaPublicacion = DateTime.Now;
+
+            var handler = new AddNewBook.CommandHandler(contexto);
+            var result = await handler.Handle(request, new CancellationToken());
+
+            Assert.True(result != null);
+        }
     }
 }
