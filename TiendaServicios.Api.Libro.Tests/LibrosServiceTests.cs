@@ -13,6 +13,7 @@ namespace TiendaServicios.Api.Libro.Tests
     {
         private IEnumerable<LibroMaterial> ObtenerDataPrueba()
         {
+            // Este método es para llenar data usando genfu
             A.Configure<LibroDto>().Fill(x => x.Titulo).AsArticleTitle().Fill(x => x.LibroId, () => { return Guid.NewGuid(); });
             var lista = A.ListOf<LibroMaterial>(30);
             lista[0].LibroId = Guid.Empty;
